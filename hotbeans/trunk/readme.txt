@@ -27,7 +27,22 @@ HotBeans is released under the terms of the Apache Software License,
 version 2.0 (see license.txt).
 
 
-2. Third party library dependencies
+2. Distribution contents
+
+The normal distribution (hotbeans-X.X.zip) contains the following:
+* dist - contains the main jar file (hotbeans.jar) and zipped source (hotbeans-X.X-src.zip)
+* docs - documentation and javadoc
+
+The full distribution (hotbeans-X.X-full.zip) contains the following:
+* dist - contains the main jar file (hotbeans.jar) and the unit test jar file (hotbeans-tests.jar). 
+* docs - documentation and javadoc.
+* lib - third party libraries, required for building the project.
+* samples - some samples demonstration usage.
+* src - the source code
+* test - test configuration files.
+
+
+3. Third party library dependencies
 
 The full ("-full") distribution of HotBeans contains all third party libraries that are 
 required to build HotBeans. All third party libraries are subject to their respective 
@@ -62,7 +77,7 @@ Version: 1.2.9
 License: Apache License Version 2.0
 
 
-3. Where to begin?
+4. Where to begin?
 
 Sample applications may be found in the "samples" directory and there is API 
 documentation available in javadoc format in the "docs" directory.  
