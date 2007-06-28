@@ -1,0 +1,53 @@
+Change log for the HotBeans Framework
+--------------------------------------------------------------------------------
+
+
+Version 1.2 (20070625)
+
+* First version after conversion to open source project.
+
+* Project directory structure and build scripts updated.
+
+
+Version 1.1 (20070503)
+
+* Removed package hotbeans.support.messaging. Replaced by package com.teletalk.jserver.tcp.messaging.admin.hotbeans in JServer.
+
+
+Version 1.0.1 (20070212)
+
+* Added two new methods to HotBeanContext (and implementations): 
+	- String getHotBeanClassName(String beanName)
+	- Class getHotBeanClass(String beanName)
+	
+* Added two new methods to HotBeanModuleRepository (and implementations):  
+	- String getHotBeanClassName(String moduleName, String beanName)
+	- Class getHotBeanClass(String moduleName, String beanName)
+	
+* Added two new methods to HotBeansMessagingInterface: 
+	- String getHotBeanClassName(String moduleName, String beanName)
+	- Class getHotBeanClass(String moduleName, String beanName)
+
+* HotBeansMessageReceiver now implements RpcMessageReceiver instead of RcpMessageReceiver.
+
+
+Version 1.0 (20060607)
+
+* Added getter/setter for a list of interface class names (String objects) to HotBeanProxyFactoryBean.
+
+
+Version 1.0 (20060511)
+
+* Class hotbeans.support.messaging.HotBeansMessageReceiver now registers itself as a custom administration handler 
+   com.teletalk.jserver.net.admin.AdministrationManager.
+
+
+Version 1.0 (20060428)
+
+* The repository name is now cached when method getName() in HotBeansMessagingClient is called.
+
+
+Version 1.0 (20060427)
+
+* Class hotbeans.support.messaging.HotBeansMessageReceiver now registers a copy of itself as a message receiver in the 
+  SnsClientManager of the server, if any. This enables remote administration of the hot beans repository through an SNS.

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	
+	<bean id="HotBeanModuleRepository1" class="hotbeans.support.FileSystemHotBeanModuleRepository">
+		<property name="moduleRepositoryDirectory"><value>test/junit/hotModules</value></property>
+		<property name="temporaryDirectory"><value>test/junit/hotModules/temp1</value></property>
+		<property name="checkInterval"><value>1000</value></property>
+	</bean>
+	
+   <bean id="HotBeanModuleRepository2" class="hotbeans.support.FileSystemHotBeanModuleRepository">
+		<property name="moduleRepositoryDirectory"><value>test/junit/hotModules</value></property>
+		<property name="temporaryDirectory"><value>test/junit/hotModules/temp2</value></property>
+		<property name="checkInterval"><value>1000</value></property>
+	</bean>
+
+</beans>

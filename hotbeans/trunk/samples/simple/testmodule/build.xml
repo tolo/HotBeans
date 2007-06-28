@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="TestModule" default="build" basedir=".">
+
+	<property file="../../build.properties"/>
+	
+	<description>TestModule build file</description>
+	
+	<!-- Set global properties for this build -->
+	<property name="classes.dir" location="build/classes"/>
+	<property name="dist.dir" location="../../../dist"/>
+	<property name="lib.dir" location="../../../lib"/>
+	<property name="module.dir" location="module"/>
+	<property name="src.dir" location="src"/>
+   
+   
+	<!-- COMPILE TARGET-->
+	<target name="compile" description="Compile the source">
+		<mkdir dir="${classes.dir}"/>
+	   
+		<path id="class.path">
+	    	<pathelement path="${java.class.path}/"/>
+	    	<pathelement path="..\..\bin/"/>
+			<fileset dir="${lib.dir}" includes="**/*.jar"/>
+			<fileset dir="${dist.dir}" includes="**/*.jar"/>
+		</path>
+		
+		<!-- Compile the java code from ${src.dir} into ${classes.dir} -->
+	    <javac srcdir="${src.dir}" destdir="${classes.dir}" debug="true">
+			<classpath refid="class.path"/>
+		</javac>
+	   
+	</target>
+   
+   	
+	<!-- BUILD TARGET -->
+	<target name="build" depends="compile" description="Compiles and builds the application">
+		   
+		<!-- Create the time stamp -->
+		<tstamp>
+		   <format property="jarTime" pattern="yyyy-MM-dd HH:mm"/>
+		</tstamp>
+		
+		<mkdir dir="${module.dir}/lib"/>
+	   
+	   <!-- Make lib/testModuleClasses.jar -->
+		<jar jarfile="${module.dir}/lib/testModuleClasses.jar">
+			<fileset dir="${classes.dir}" excludes="**/test/**"/>
+			<manifest>
+				<attribute name="Implementation-Title" value="Test Module"/>
+				<attribute name="Implementation-Version" value="${DSTAMP}${TSTAMP}"/>
+				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="Compiled-With" value="${java.version}"/>
+				<attribute name="Build-Date" value="${jarTime}"/>
+			</manifest>
+		</jar>
+		
+	   <!-- Make testModule.jar -->
+		<jar jarfile="testModule.jar">
+			<fileset dir="${module.dir}" excludes="**/test/**"/>
+			
+			<!-- This is the manifest that is used by the HotBeansRepository -->
+			<manifest>
+				<attribute name="HotBeanModule-Name" value="TestModule"/>
+				<attribute name="Implementation-Title" value="Test Module"/>
+				<attribute name="Implementation-Version" value="1.0 (${DSTAMP}${TSTAMP})"/>
+			   <attribute name="Built-By" value="${user.name}"/>
+				<attribute name="Compiled-With" value="${java.version}"/>
+				<attribute name="Build-Date" value="${jarTime}"/>
+			</manifest>
+			
+		</jar>
+		
+		<copy file="testModule.jar" tofile="0.jar"/>
+		<copy file="testModule.jar" tofile="1.jar"/>
+		
+		
+		<!-- Create broken module (i.e. with missing classes) - used for unit testing -->
+		<delete file="${module.dir}/lib/testModuleClasses.jar"/>
+		
+	   <!-- Make testModuleBroken.jar -->
+		<jar jarfile="testModuleBroken.jar">
+			<fileset dir="${module.dir}" excludes="**/MyLittleTestBean.*"/>
+			
+			<!-- This is the manifest that is used by the HotBeansRepository -->
+			<manifest>
+				<attribute name="HotBeanModule-Name" value="TestModule"/>
+				<attribute name="Implementation-Title" value="Test Module"/>
+				<attribute name="Implementation-Version" value="1.0 (${DSTAMP}${TSTAMP})"/>
+				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="Compiled-With" value="${java.version}"/>
+				<attribute name="Build-Date" value="${jarTime}"/>
+			</manifest>
+			
+		</jar>
+		
+	</target>
+	
+</project>
